@@ -4,7 +4,7 @@ public class Task {
 
     private String name;
     private String description;
-    private Integer taskPoint;
+    private Double taskPoint;
     private String status;
     private String key;
 
@@ -27,11 +27,11 @@ public class Task {
         this.description = description;
     }
 
-    public Integer getTaskPoint(){
+    public Double getTaskPoint(){
         return taskPoint;
     }
 
-    public void setTaskPoint(Integer taskPoint) {
+    public void setTaskPoint(Double taskPoint) {
         this.taskPoint = taskPoint;
     }
 
