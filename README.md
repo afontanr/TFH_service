@@ -83,6 +83,6 @@ After getting a cup of coffee, you'll be able to run this executable directly:
 
 ```bash
     mvn clean package
-    docker build -f src/main/docker/Dockerfile.jvm -t sockmal/tfh-task .
-    docker push sockmal/tfh-task
+    docker build -f src/main/docker/Dockerfile.jvm -t sockmal/tfh-ms .
+    docker push sockmal/tfh-ms
 ```

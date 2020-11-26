@@ -1,22 +1,22 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: tfh-task
+  name: tfh-ms
   labels:
-    app: tfh-task
+    app: tfh-ms
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: tfh-task
+      app: tfh-ms
   template:
     metadata:
       labels:
-        app: tfh-task
+        app: tfh-ms
     spec:
       containers:
-        - name: tfh-task
-          image: "sockmal/tfh-task:0.5.0"
+        - name: tfh-ms
+          image: "sockmal/tfh-ms:0.5.0"
           ports:
           - containerPort: 8080
           livenessProbe:
@@ -44,10 +44,10 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: tfh-task-service
+  name: tfh-ms-service
 spec:
   selector:
-    app: tfh-task
+    app: tfh-ms
   ports:
     - port: 8080 # Default port for image
 
@@ -56,11 +56,11 @@ spec:
 apiVersion: v1
 kind: Route
 metadata:
-  name: tfh-task-service
+  name: tfh-ms-service
 spec:
   #path: /
   port:
     targetPort: 8080
   to:
     kind: Service
-    name: tfh-task-service
+    name: tfh-ms-service
