@@ -7,10 +7,15 @@ import com.bbva.tinfoilhat.service.TaskService;
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 import org.jboss.resteasy.annotations.jaxrs.QueryParam;
 
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
+import io.smallrye.mutiny.Uni;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import javax.ws.rs.core.Response.Status;
 
 @Path("/children/{id}")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -25,8 +30,9 @@ public class ChildController {
 
 
     @GET
-    public Child getChild(@PathParam("id") String key){
-        return service.findByID(key);
+    public Response getChild(@PathParam("id") String key){
+        Child child = service.findByID(key);
+        return (child != null) ? Response.ok(child).build() : Response.status(Status.NOT_FOUND).build();
     }
 
     @PUT

@@ -29,7 +29,8 @@ public class ChildrenRepository {
 
     public Child findById(String id) {
         MongoCursor<Document> cursor = getCollection().find(eq("id", id)).iterator();
-        return toList(cursor).get(0);
+        List<Child> children = toList(cursor);
+        return (children.isEmpty()) ? null : children.get(0);
     }
 
     public Child add(Child child) {
