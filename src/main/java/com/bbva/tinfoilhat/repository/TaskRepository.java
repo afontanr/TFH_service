@@ -1,6 +1,7 @@
 package com.bbva.tinfoilhat.repository;
 
 import com.bbva.tinfoilhat.model.Task;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -42,8 +43,16 @@ public class TaskRepository {
         MongoCursor<Document> cursor = getCollection().find(eq("name", task.getName())).iterator();
         try {
             while (cursor.hasNext()) {
+                BasicDBObject newDocument = new BasicDBObject();
+                BasicDBObject searchQuery = new BasicDBObject().append("name", task.getName());
                 Document document = cursor.next();
-                document.put("key", task.getKey());
+                newDocument.put("name", task.getName());
+                newDocument.put("key", task.getKey());
+                newDocument.put("description", document.getString("description"));
+                newDocument.put("taskPoint", document.getDouble("taskPoint"));
+                newDocument.put("status", document.getString("status"));
+
+                getCollection().replaceOne(searchQuery, newDocument);
             }
         } finally {
             cursor.close();

@@ -35,6 +35,7 @@ public class ChildController {
     }
 
     @PUT
+    @Path("/chatbot")
     public void setBotID(@PathParam("id") String key, @QueryParam("chatbotid") String chatBotID){
         service.setBotID(key, chatBotID);
     }

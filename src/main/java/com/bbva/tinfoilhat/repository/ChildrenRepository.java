@@ -1,6 +1,7 @@
 package com.bbva.tinfoilhat.repository;
 
 import com.bbva.tinfoilhat.model.Child;
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -42,11 +43,22 @@ public class ChildrenRepository {
 
     public void addTotalPoint(String id, Integer points){
         MongoCursor<Document> cursor = getCollection().find(eq("id", id)).iterator();
+        
         try {
             while (cursor.hasNext()) {
+                BasicDBObject newDocument = new BasicDBObject();
+                BasicDBObject searchQuery = new BasicDBObject().append("id", id);
                 Document document = cursor.next();
-                document.put("totalPoint", points);
-                getCollection().insertOne(document);
+                Integer currentPoints = document.getInteger("totalPoint");
+
+                newDocument.put("totalPoint", points + currentPoints);
+                newDocument.put("id", document.getString("id"));
+                newDocument.put("name", document.getString("name"));
+                newDocument.put("surname", document.getString("surname"));
+                newDocument.put("age", document.getInteger("age"));
+                newDocument.put("chatbotId", document.getString("chatbotId"));
+                
+                getCollection().replaceOne(searchQuery, newDocument);
             }
         } finally {
             cursor.close();
@@ -57,9 +69,17 @@ public class ChildrenRepository {
         MongoCursor<Document> cursor = getCollection().find(eq("id", id)).iterator();
         try {
             while (cursor.hasNext()) {
+                BasicDBObject newDocument = new BasicDBObject();
+                BasicDBObject searchQuery = new BasicDBObject().append("id", id);
                 Document document = cursor.next();
-                document.put("chatbotid", botID);
-                getCollection().insertOne(document);
+                newDocument.put("totalPoint", document.getInteger("totalPoint"));
+                newDocument.put("id", document.getString("id"));
+                newDocument.put("name", document.getString("name"));
+                newDocument.put("surname", document.getString("surname"));
+                newDocument.put("age", document.getInteger("age"));
+                newDocument.put("chatbotId", botID);
+                
+                getCollection().replaceOne(searchQuery, newDocument);
             }
         } finally {
             cursor.close();
@@ -79,9 +99,9 @@ public class ChildrenRepository {
                 child.setId(document.getString("id"));
                 child.setName(document.getString("name"));
                 child.setSurname(document.getString("surname"));
-                child.setAge(document.getDouble("status").intValue());
-                child.setChatBotID(document.getString("chatbotid"));
-                child.setTotalPoint(document.getDouble("totalPoint").intValue());
+                child.setAge(document.getInteger("age"));
+                child.setChatBotID(document.getString("chatbotId"));
+                child.setTotalPoint(document.getInteger("totalPoint"));
                 list.add(child);
             }
         } finally {
