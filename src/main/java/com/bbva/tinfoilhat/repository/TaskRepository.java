@@ -98,7 +98,7 @@ public class TaskRepository {
                 Task task = new Task();
                 task.setName(document.getString("name"));
                 task.setDescription(document.getString("description"));
-                task.setTaskPoint(document.getInteger("taskPoint"));
+                task.setTaskPoint(document.getDouble("taskPoint").intValue());
                 task.setStatus(document.getString("status"));
                 task.setKey(document.getString("key"));
                 list.add(task);

@@ -25,7 +25,7 @@ public class TaskController {
     }
 
     @PUT
-    @Path("/tasks/status")
+    @Path("/status")
     public void setStatus(Task task) {
         if(task.getStatus().equals("FINALIZADO")){
             service.statusFinal(task);
