@@ -33,7 +33,7 @@ public class ParentService {
             childrenName = parent.get(0).getChildren();
         }
 
-        return childrenName.stream().map(it -> childService.findByID(it)).collect(Collectors.toList());
+        return childrenName.stream().map(it -> childService.findByID(it).get(0)).collect(Collectors.toList());
     }
 
 }
