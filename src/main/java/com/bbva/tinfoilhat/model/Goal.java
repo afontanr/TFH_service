@@ -35,29 +35,12 @@ public class Goal {
         this.description = description;
     }
 
-    public Double getGoalPoint(){
-        return goalPoint;
-    }
-
-    public void setGoalPoint(Double taskPoint) {
-        this.goalPoint = goalPoint;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
     public List<UserGoal> getGoalUser() {
         return this.goalUser;
     }
 
-    public List<UserGoal> setGoalUser(List<UserGoal> goalUser) {
+    public void setGoalUser(List<UserGoal> goalUser) {
         this.goalUser = goalUser;
     }
-
 
 }

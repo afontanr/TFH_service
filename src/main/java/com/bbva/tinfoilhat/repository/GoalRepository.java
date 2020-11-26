@@ -1,7 +1,7 @@
 package com.bbva.tinfoilhat.repository;
 
 import com.bbva.tinfoilhat.model.Goal;
-import com.mongodb.BasicDBObject;
+import com.bbva.tinfoilhat.model.UserGoal;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -13,24 +13,20 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
 
 @ApplicationScoped
 public class GoalRepository {
 
     @Inject
-    @MongoClientName("Goal")
+    @MongoClientName("goal")
     MongoClient mongoClient;
-
-
 
     public List<Goal> getGoals(){
         MongoCursor<Document> cursor = getCollection().find().iterator();
         return toList(cursor);
     }
 
-
-     private MongoCollection getCollection(){
+    private MongoCollection getCollection(){
         return mongoClient.getDatabase("tfhgoal").getCollection("tfhgoal");
     }
 
@@ -42,8 +38,7 @@ public class GoalRepository {
                 Goal goal = new Goal();
                 goal.setName(document.getString("name"));
                 goal.setDescription(document.getString("description"));
-                goal.setGoalPoint(document.getDouble("goalPoint"));
-                goal.setGoalUser(document.getList("goalUser", GoalUser.class));
+                goal.setGoalUser(document.getList("goalUser", UserGoal.class));
                 list.add(goal);
             }
         } finally {
@@ -51,5 +46,4 @@ public class GoalRepository {
         }
         return list;
     }
-
 }

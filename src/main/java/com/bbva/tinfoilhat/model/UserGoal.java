@@ -1,16 +1,13 @@
-
-
 package com.bbva.tinfoilhat.model;
-import java.util.List;
 
 public class UserGoal {
 
     private String key;
-    private Integer goalPoint;
+    private Double goalPoint;
 
     public UserGoal() {}
 
-    public UserGoal(String key, Integer goalPoint) {
+    public UserGoal(String key, Double goalPoint) {
         this.key= key;
         this.goalPoint = goalPoint;
     }
@@ -23,11 +20,11 @@ public class UserGoal {
         this.key = key;
     }
 
-    public String getGoalPoint() {
+    public Double getGoalPoint() {
         return goalPoint;
     }
 
-    public void setGoalPoint(String goalPoint) {
+    public void setGoalPoint(Double goalPoint) {
         this.goalPoint = goalPoint;
     }
 }
