@@ -27,16 +27,14 @@ public class ChildrenRepository {
         return toList(cursor);
     }
 
-    public Child findById(String id) {
+    public List<Child> findById(String id) {
         MongoCursor<Document> cursor = getCollection().find(eq("id", id)).iterator();
-        List<Child> children = toList(cursor);
-        return (children.isEmpty()) ? null : children.get(0);
+        return toList(cursor);
     }
 
-    public Child findByChatbotID(String idChatbot) {
+    public List<Child> findByChatbotID(String idChatbot) {
         MongoCursor<Document> cursor = getCollection().find(eq("chatbotId", idChatbot)).iterator();
-        List<Child> children = toList(cursor);
-        return (children.isEmpty()) ? null : children.get(0);
+        return toList(cursor);
     }
 
     public Child add(Child child) {

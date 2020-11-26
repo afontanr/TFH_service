@@ -17,7 +17,7 @@ public class ChildService {
         return repository.findAll();
     }
 
-    public Child findByID(String id) {
+    public List<Child> findByID(String id) {
         return repository.findById(id);
     }
 
@@ -29,7 +29,7 @@ public class ChildService {
         repository.setBotID(id, botID);
     }
 
-    public Child getChildByChatbotID(String chatbotId){
+    public List<Child> getChildByChatbotID(String chatbotId){
         return repository.findByChatbotID(chatbotId);
     }
 

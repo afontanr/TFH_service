@@ -30,16 +30,14 @@ public class ChildController {
 
 
     @GET
-    public Response getChildByChatbotId(@QueryParam("chatbotId") String chatbotId){
-        Child child = service.getChildByChatbotID(chatbotId);
-        return (child != null) ? Response.ok(child).build() : Response.status(Status.NOT_FOUND).build();
+    public List<Child> getChildByChatbotId(@QueryParam("chatbotId") String chatbotId){
+        return service.getChildByChatbotID(chatbotId);
     }
 
     @GET
     @Path("/{id}")
-    public Response getChild(@PathParam("id") String key){
-        Child child = service.findByID(key);
-        return (child != null) ? Response.ok(child).build() : Response.status(Status.NOT_FOUND).build();
+    public List<Child> getChild(@PathParam("id") String key){
+        return service.findByID(key);
     }
 
     @PUT
