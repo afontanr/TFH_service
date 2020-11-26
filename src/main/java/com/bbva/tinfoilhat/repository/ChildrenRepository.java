@@ -54,13 +54,13 @@ public class ChildrenRepository {
                 BasicDBObject newDocument = new BasicDBObject();
                 BasicDBObject searchQuery = new BasicDBObject().append("id", id);
                 Document document = cursor.next();
-                Integer currentPoints = document.getDouble("totalPoint").intValue();
+                Integer currentPoints = document.getInteger("totalPoint");
 
                 newDocument.put("totalPoint", points + currentPoints);
                 newDocument.put("id", document.getString("id"));
                 newDocument.put("name", document.getString("name"));
                 newDocument.put("surname", document.getString("surname"));
-                newDocument.put("age", document.getDouble("age").intValue());
+                newDocument.put("age", document.getInteger("age"));
                 newDocument.put("chatbotId", document.getString("chatbotId"));
                 
                 getCollection().replaceOne(searchQuery, newDocument);
