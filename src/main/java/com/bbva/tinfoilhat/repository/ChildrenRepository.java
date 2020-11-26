@@ -104,9 +104,9 @@ public class ChildrenRepository {
                 child.setId(document.getString("id"));
                 child.setName(document.getString("name"));
                 child.setSurname(document.getString("surname"));
-                child.setAge(document.getDouble("age").intValue());
+                child.setAge(document.getInteger("age"));
                 child.setChatBotID(document.getString("chatbotId"));
-                child.setTotalPoint(document.getDouble("totalPoint").intValue());
+                child.setTotalPoint(document.getInteger("totalPoint"));
                 list.add(child);
             }
         } finally {
