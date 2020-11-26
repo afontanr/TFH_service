@@ -11,7 +11,7 @@ import com.bbva.tinfoilhat.service.TaskService;
 
 import org.jboss.resteasy.annotations.jaxrs.PathParam;
 
-
+@Path("")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TaskController {
