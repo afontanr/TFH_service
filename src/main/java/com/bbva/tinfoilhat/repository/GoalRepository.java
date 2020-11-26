@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @ApplicationScoped
@@ -38,7 +39,9 @@ public class GoalRepository {
                 Goal goal = new Goal();
                 goal.setName(document.getString("name"));
                 goal.setDescription(document.getString("description"));
-                goal.setGoalUser(document.getList("goalUser", UserGoal.class));
+                goal.setGoalUser(document.getList("goalUser", Document.class).stream()
+                .map(p -> new UserGoal(p.getString("key"), p.getDouble("goalPoint")))
+                .collect(Collectors.toList()));
                 list.add(goal);
             }
         } finally {

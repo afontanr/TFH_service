@@ -21,11 +21,13 @@ public class GoalController {
     @GET
     @Path("/goals")
     public List<Goal> listGoals(){
-        return service.listGoals();
+        List<Goal> g = service.listGoals();
+        System.out.println("goals: " + g.toString());
+        return g;
     }
 
     @GET
-    @Path("/goals/")
+    @Path("/goals/user/{key}")
     public List<Goal> listGoals(@PathParam("key") String key){
         return service.listGoals().stream().filter(
                 g -> g.getGoalUser().stream().anyMatch(u -> u.getkey().equals(key))
