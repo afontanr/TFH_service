@@ -77,3 +77,12 @@ native executable:
 After getting a cup of coffee, you'll be able to run this executable directly:
 
 > ./target/getting-started-1.0-SNAPSHOT-runner
+
+
+# Docker Build and Push
+
+```bash
+    mvn clean package
+    docker build -f src/main/docker/Dockerfile.jvm -t sockmal/tfh-task .
+    docker push sockmal/tfh-task
+```
