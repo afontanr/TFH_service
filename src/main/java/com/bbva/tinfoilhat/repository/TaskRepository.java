@@ -16,7 +16,8 @@ import static com.mongodb.client.model.Filters.eq;
 @ApplicationScoped
 public class TaskRepository {
 
-    @Inject MongoClient mongoClient;
+    @Inject 
+    MongoClient mongoClient;
 
     public List<Task> findAllByKey(String key){
         List<Task> list = new ArrayList<>();
