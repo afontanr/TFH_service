@@ -19,6 +19,22 @@ spec:
           image: "sockmal/tfh-ms:0.8.0"
           ports:
           - containerPort: 8080
+          env:
+          - name: USER_DB
+            valueFrom:
+              secretKeyRef:
+                name: tfh-ms-secret
+                key: username
+          - name: PWD_DB
+            valueFrom:
+              secretKeyRef:
+                name: tfh-ms-secret
+                key: password
+          - name: URL_DB
+            valueFrom:
+              configMapKeyRef:
+                name: tfh-ms-config
+                key: uriBase
           livenessProbe:
             httpGet:
               path: /
