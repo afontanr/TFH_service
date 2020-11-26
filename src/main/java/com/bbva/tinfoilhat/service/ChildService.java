@@ -29,4 +29,8 @@ public class ChildService {
         repository.setBotID(id, botID);
     }
 
+    public Child getChildByChatbotID(String chatbotId){
+        return repository.findByChatbotID(chatbotId);
+    }
+
 }

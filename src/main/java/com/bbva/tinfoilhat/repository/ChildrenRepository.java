@@ -33,6 +33,12 @@ public class ChildrenRepository {
         return (children.isEmpty()) ? null : children.get(0);
     }
 
+    public Child findByChatbotID(String idChatbot) {
+        MongoCursor<Document> cursor = getCollection().find(eq("chatbotId", idChatbot)).iterator();
+        List<Child> children = toList(cursor);
+        return (children.isEmpty()) ? null : children.get(0);
+    }
+
     public Child add(Child child) {
         Document document = new Document()
                 .append("id", child.getId()).append("name", child.getName())

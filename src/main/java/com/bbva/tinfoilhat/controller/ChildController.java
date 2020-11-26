@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import javax.ws.rs.core.Response.Status;
 
-@Path("/children/{id}")
+@Path("/children")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ChildController {
@@ -30,24 +30,32 @@ public class ChildController {
 
 
     @GET
+    public Response getChildByChatbotId(@QueryParam("chatbotId") String chatbotId){
+        Child child = service.getChildByChatbotID(chatbotId);
+        return (child != null) ? Response.ok(child).build() : Response.status(Status.NOT_FOUND).build();
+    }
+
+    @GET
+    @Path("/{id}")
     public Response getChild(@PathParam("id") String key){
         Child child = service.findByID(key);
         return (child != null) ? Response.ok(child).build() : Response.status(Status.NOT_FOUND).build();
     }
 
     @PUT
+    @Path("/{id}")
     public void addPoints(@PathParam("id") String key, @QueryParam("points") Integer points){
         service.addTotalPoint(key, points);
     }
 
     @PUT
-    @Path("/chatbot")
+    @Path("/{id}/chatbot")
     public void setBotID(@PathParam("id") String key, @QueryParam("chatbotid") String chatBotID){
         service.setBotID(key, chatBotID);
     }
 
     @GET
-    @Path("/tasks")
+    @Path("/{id}/tasks")
     public List<Task> findAllByKey(@PathParam("id") String key){
         return taskService.findAllByKey(key);
     }
