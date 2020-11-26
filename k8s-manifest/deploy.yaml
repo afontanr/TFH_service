@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tfh-ms
-          image: "sockmal/tfh-ms:0.8.0"
+          image: "sockmal/tfh-ms:0.10.0"
           ports:
           - containerPort: 8080
           env:
