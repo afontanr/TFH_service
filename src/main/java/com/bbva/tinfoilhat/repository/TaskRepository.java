@@ -46,6 +46,19 @@ public class TaskRepository {
         return task;
     }
 
+    public Task setUser(Task task) {
+        MongoCursor<Document> cursor = getCollection().find(eq("name", task.getName())).iterator();
+        try {
+            while (cursor.hasNext()) {
+                Document document = cursor.next();
+                document.put("key", task.getKey());
+            }
+        } finally {
+            cursor.close();
+        }
+        return task;
+    }
+
      private MongoCollection getCollection(){
         return mongoClient.getDatabase("tfhtask").getCollection("tfhtask");
     }

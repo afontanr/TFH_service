@@ -21,4 +21,7 @@ public class TaskService {
         return repository.findAllByKey(key);
     }
 
+    public Task add(Task task) {
+        return repository.add(task);
+    }
 }
