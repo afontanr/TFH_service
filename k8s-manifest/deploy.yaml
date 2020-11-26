@@ -68,4 +68,4 @@ spec:
     - port: 8080 # Default port for image
 
 ## ROUTE
-oc create route edge --service=tfh-ms-service --cert=ca.cert --key=ca.key --ca-cert=ca.crt --hostname=tfh-ms.tinfoilrewardgame.tk
+#oc create route edge --service=tfh-ms-service --cert=ca.cert --key=ca.key --ca-cert=ca.crt --hostname=tfh-ms.tinfoilrewardgame.tk
