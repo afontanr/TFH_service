@@ -11,6 +11,14 @@ public class Task {
     public Task() {
     }
 
+    public Task(String name, String description, Double taskPoint, String status, String key) {
+        this.name = name;
+        this.description = description;
+        this.taskPoint = taskPoint;
+        this.status = status;
+        this.key = key;
+    }
+
     public String getName() {
         return this.name;
     }

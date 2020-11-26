@@ -1,13 +1,12 @@
 package com.bbva.tinfoilhat.service;
 
 
-import java.util.List;
+import com.bbva.tinfoilhat.model.Task;
+import com.bbva.tinfoilhat.repository.TaskRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
-import com.bbva.tinfoilhat.model.Task;
-import com.bbva.tinfoilhat.repository.TaskRepository;
+import java.util.List;
 
 @ApplicationScoped
 public class TaskService {
@@ -23,5 +22,13 @@ public class TaskService {
 
     public Task add(Task task) {
         return repository.add(task);
+    }
+
+    public List<Task> getUnassignedTask(){
+        return repository.getTaskUnassigned();
+    }
+
+    public Task setUser(Task task) {
+        return repository.setUser(task);
     }
 }
