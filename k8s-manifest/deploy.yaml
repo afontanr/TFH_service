@@ -67,16 +67,5 @@ spec:
   ports:
     - port: 8080 # Default port for image
 
----
-
-apiVersion: v1
-kind: Route
-metadata:
-  name: tfh-ms-service
-spec:
-  #path: /
-  port:
-    targetPort: 8080
-  to:
-    kind: Service
-    name: tfh-ms-service
+## ROUTE
+oc create route edge --service=tfh-ms-service --cert=ca.cert --key=ca.key --ca-cert=ca.crt --hostname=tfh-ms.tinfoilrewardgame.tk
