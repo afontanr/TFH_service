@@ -27,6 +27,11 @@ public class TaskRepository {
         return toList(cursor);
     }
 
+    public List<Task> getTaskByName(String name) {
+        MongoCursor<Document> cursor = getCollection().find(eq("name", name)).iterator();
+        return toList(cursor);
+    }
+
     public Task add(Task task) {
         Document document = new Document().append("name", task.getName()).append("description", task.getDescription())
         .append("taskPoint", task.getTaskPoint()).append("status", task.getStatus()).append("key", task.getKey());
@@ -37,6 +42,27 @@ public class TaskRepository {
     public List<Task> getTaskUnassigned(){
         MongoCursor<Document> cursor = getCollection().find(eq("key", "")).iterator();
         return toList(cursor);
+    }
+
+    public Task setStatus(Task task) {
+        MongoCursor<Document> cursor = getCollection().find(eq("name", task.getName())).iterator();
+        try {
+            while (cursor.hasNext()) {
+                BasicDBObject newDocument = new BasicDBObject();
+                BasicDBObject searchQuery = new BasicDBObject().append("name", task.getName());
+                Document document = cursor.next();
+                newDocument.put("name", task.getName());
+                newDocument.put("key", document.getString("key"));
+                newDocument.put("description", document.getString("description"));
+                newDocument.put("taskPoint", document.getDouble("taskPoint"));
+                newDocument.put("status", task.getStatus());
+
+                getCollection().replaceOne(searchQuery, newDocument);
+            }
+        } finally {
+            cursor.close();
+        }
+        return task;
     }
 
     public Task setUser(Task task) {
@@ -72,7 +98,7 @@ public class TaskRepository {
                 Task task = new Task();
                 task.setName(document.getString("name"));
                 task.setDescription(document.getString("description"));
-                task.setTaskPoint(document.getDouble("taskPoint"));
+                task.setTaskPoint(document.getInteger("taskPoint"));
                 task.setStatus(document.getString("status"));
                 task.setKey(document.getString("key"));
                 list.add(task);

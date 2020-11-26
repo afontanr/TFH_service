@@ -6,32 +6,41 @@ import com.bbva.tinfoilhat.service.TaskService;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Arrays;
 import java.util.List;
 
-@Path("")
+@Path("/tasks")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TaskController {
 
     @Inject
     TaskService service;
-
+    private final List<String> statuses = Arrays.asList("NUEVO", "EN CURSO", "FINALIZADO");
 
 
     @POST
-    @Path("/tasks")
     public Task addTask(Task task) {
         return service.add(task);
     }
 
+    @PUT
+    @Path("/tasks/status")
+    public void setStatus(Task task) {
+        if(task.getStatus().equals("FINALIZADO")){
+            service.statusFinal(task);
+        } else {
+            service.setStatus(task);
+        }
+
+    }
+
     @GET
-    @Path("/tasks")
     public List<Task> getUnassignedTask(){
         return service.getUnassignedTask();
     }
 
     @PUT
-    @Path("/tasks")
     public Task setUser(Task task) {
         return service.setUser(task);
     }

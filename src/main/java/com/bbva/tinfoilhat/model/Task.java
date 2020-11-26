@@ -4,14 +4,14 @@ public class Task {
 
     private String name;
     private String description;
-    private Double taskPoint;
+    private Integer taskPoint;
     private String status;
     private String key;
 
     public Task() {
     }
 
-    public Task(String name, String description, Double taskPoint, String status, String key) {
+    public Task(String name, String description, Integer taskPoint, String status, String key) {
         this.name = name;
         this.description = description;
         this.taskPoint = taskPoint;
@@ -35,11 +35,11 @@ public class Task {
         this.description = description;
     }
 
-    public Double getTaskPoint(){
+    public Integer getTaskPoint(){
         return taskPoint;
     }
 
-    public void setTaskPoint(Double taskPoint) {
+    public void setTaskPoint(Integer taskPoint) {
         this.taskPoint = taskPoint;
     }
 

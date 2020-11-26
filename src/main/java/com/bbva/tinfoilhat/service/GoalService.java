@@ -18,4 +18,8 @@ public class GoalService {
     public List<Goal> listGoals(){
         return repository.getGoals();
     }
+
+    public void setChildGoal(String key, Integer totalPoint){
+        repository.setChildGoal(key, totalPoint);
+    }
 }

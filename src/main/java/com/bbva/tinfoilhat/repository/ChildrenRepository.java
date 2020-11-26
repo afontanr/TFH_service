@@ -41,7 +41,7 @@ public class ChildrenRepository {
         Document document = new Document()
                 .append("id", child.getId()).append("name", child.getName())
                 .append("surname", child.getSurname()).append("age", child.getAge())
-                .append("chatbotid", child.getChatBotID()).append("totalPoint", child.getTotalPoint());
+                .append("chatbotId", child.getChatBotID()).append("totalPoint", child.getTotalPoint());
         getCollection().insertOne(document);
         return child;
     }

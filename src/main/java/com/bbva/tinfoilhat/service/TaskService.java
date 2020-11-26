@@ -15,6 +15,9 @@ public class TaskService {
     @Inject
     TaskRepository repository;
 
+    @Inject
+    ChildService childService;
+
 
     public List<Task> findAllByKey(String key) {
         return repository.findAllByKey(key);
@@ -30,5 +33,16 @@ public class TaskService {
 
     public Task setUser(Task task) {
         return repository.setUser(task);
+    }
+
+    public void setStatus(Task task) {
+        repository.setStatus(task);
+    }
+
+    public void statusFinal(Task task) {
+        repository.setStatus(task);
+        Task taskFinal = repository.getTaskByName(task.getName()).get(0);
+        childService.addTotalPoint(taskFinal.getKey(), taskFinal.getTaskPoint());
+
     }
 }

@@ -13,6 +13,11 @@ public class ChildService {
     @Inject
     ChildrenRepository repository;
 
+    @Inject
+    GoalService goalService;
+
+
+
     public List<Child> findAll() {
         return repository.findAll();
     }
@@ -23,6 +28,7 @@ public class ChildService {
 
     public void addTotalPoint(String id, Integer points) {
         repository.addTotalPoint(id, points);
+        goalService.setChildGoal(id, points);
     }
 
     public void setBotID(String id, String botID) {
