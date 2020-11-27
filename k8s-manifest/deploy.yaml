@@ -5,7 +5,7 @@ metadata:
   labels:
     app: tfh-ms
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: tfh-ms
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: tfh-ms
-          image: "sockmal/tfh-ms:0.10.0"
+          image: "sockmal/tfh-ms:0.11.0"
           ports:
           - containerPort: 8080
           env:
