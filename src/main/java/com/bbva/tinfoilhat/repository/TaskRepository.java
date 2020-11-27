@@ -40,6 +40,8 @@ public class TaskRepository {
     }
 
     public List<Task> getTaskUnassigned(){
+        BasicDBObject searchQuery = new BasicDBObject().append("taskPoint", null);
+        getCollection().deleteMany(searchQuery);
         MongoCursor<Document> cursor = getCollection().find(eq("key", "")).iterator();
         return toList(cursor);
     }
@@ -54,7 +56,7 @@ public class TaskRepository {
                 newDocument.put("name", task.getName());
                 newDocument.put("key", document.getString("key"));
                 newDocument.put("description", document.getString("description"));
-                newDocument.put("taskPoint", document.getDouble("taskPoint"));
+                newDocument.put("taskPoint", document.getInteger("taskPoint"));
                 newDocument.put("status", task.getStatus());
 
                 getCollection().replaceOne(searchQuery, newDocument);
@@ -75,7 +77,7 @@ public class TaskRepository {
                 newDocument.put("name", task.getName());
                 newDocument.put("key", task.getKey());
                 newDocument.put("description", document.getString("description"));
-                newDocument.put("taskPoint", document.getDouble("taskPoint"));
+                newDocument.put("taskPoint", document.getInteger("taskPoint"));
                 newDocument.put("status", document.getString("status"));
 
                 getCollection().replaceOne(searchQuery, newDocument);
@@ -98,7 +100,7 @@ public class TaskRepository {
                 Task task = new Task();
                 task.setName(document.getString("name"));
                 task.setDescription(document.getString("description"));
-                task.setTaskPoint(document.getDouble("taskPoint").intValue());
+                task.setTaskPoint(document.getInteger("taskPoint"));
                 task.setStatus(document.getString("status"));
                 task.setKey(document.getString("key"));
                 list.add(task);
